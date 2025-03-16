@@ -103,3 +103,13 @@ li:last-child {
 .completed {
     text-decoration: line-through red;
 }
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-buttons button {
+    margin: 0 5px;
+}
