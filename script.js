@@ -8,7 +8,7 @@ addButton.addEventListener('click', addTask);
 function addTask() {
     const taskText = taskInput.value.trim();
     if (taskText !== '') {
-        tasks.push(taskText);
+        tasks.push({ text: taskText, completed: false }); // أضفنا خاصية completed
         renderTasks();
         taskInput.value = '';
     }
@@ -16,10 +16,10 @@ function addTask() {
 
 function renderTasks() {
     taskList.innerHTML = '';
-    tasks.forEach((taskText, index) => {
+    tasks.forEach((task, index) => {
         const taskItem = document.createElement('li');
         taskItem.innerHTML = `
-            <span class="task-text">${taskText}</span>
+            <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
             <div class="task-buttons">
                 <button class="editButton" data-index="${index}">تعديل</button>
                 <button class="deleteButton" data-index="${index}">حذف</button>
@@ -37,14 +37,21 @@ function renderTasks() {
         editButton.addEventListener('click', () => {
             editTask(index);
         });
+
+        // إضافة حدث النقر على عنصر القائمة
+        const taskTextElement = taskItem.querySelector('.task-text');
+        taskTextElement.addEventListener('click', () => {
+            task.completed = !task.completed; // عكس حالة الإنجاز
+            renderTasks();
+        });
     });
 }
 
 function editTask(index) {
-    const taskText = tasks[index];
+    const taskText = tasks[index].text;
     taskInput.value = taskText;
     tasks.splice(index, 1);
-    renderTasks(); 
+    renderTasks();
     taskInput.focus();
 }
 
