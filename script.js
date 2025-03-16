@@ -4,6 +4,7 @@ const taskList = document.getElementById('taskList');
 const allFilter = document.getElementById('allFilter');
 const completedFilter = document.getElementById('completedFilter');
 const uncompletedFilter = document.getElementById('uncompletedFilter');
+const clearAllButton = document.getElementById('clearAllButton');
 
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let currentFilter = 'all';
@@ -20,6 +21,12 @@ completedFilter.addEventListener('click', () => {
 uncompletedFilter.addEventListener('click', () => {
     currentFilter = 'uncompleted';
     renderTasks();
+});
+
+clearAllButton.addEventListener('click', () => {
+    tasks = [];
+    renderTasks();
+    updateLocalStorage();
 });
 
 function addTask() {

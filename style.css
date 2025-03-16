@@ -113,3 +113,20 @@ li:last-child {
 .filter-buttons button {
     margin: 0 5px;
 }
+
+#clearAllButton {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 20px auto 0;
+    display: block;
+}
+
+#clearAllButton:hover {
+    background-color: #d32f2f;
+}
