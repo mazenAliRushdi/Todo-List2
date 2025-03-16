@@ -5,7 +5,7 @@ const allFilter = document.getElementById('allFilter');
 const completedFilter = document.getElementById('completedFilter');
 const uncompletedFilter = document.getElementById('uncompletedFilter');
 
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let currentFilter = 'all';
 
 addButton.addEventListener('click', addTask);
@@ -65,6 +65,7 @@ function renderTasks() {
             });
         }
     });
+    updateLocalStorage();
 }
 
 function editTask(index) {
@@ -75,8 +76,14 @@ function editTask(index) {
     taskInput.focus();
 }
 
+function updateLocalStorage() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
 taskInput.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
         addTask();
     }
 });
+
+renderTasks();
